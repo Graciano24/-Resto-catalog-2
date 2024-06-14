@@ -2,9 +2,9 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable import/extensions */
 // eslint-disable-next-line import/no-unresolved
-import RestaurantApiSource from '../../data/restaurantdb-source';
-import { createRestaurantItemTemplate } from '../templates/template-creator';
-import API_ENDPOINT from '../../globals/api-endpoint';
+import RestaurantApiSource from "../../data/restaurantdb-source";
+import { createRestaurantItemTemplate } from "../templates/template-creator";
+import API_ENDPOINT from "../../globals/api-endpoint";
 
 const Home = {
   async render() {
@@ -21,15 +21,15 @@ const Home = {
   },
 
   async afterRender() {
-    const restaurantsContainer = document.getElementById('restaurants');
-    const searchButton = document.getElementById('search-button');
-    const searchInput = document.getElementById('search-input');
+    const restaurantsContainer = document.getElementById("restaurants");
+    const searchButton = document.getElementById("search-button");
+    const searchInput = document.getElementById("search-input");
 
     const displayRestaurants = (restaurants) => {
-      restaurantsContainer.innerHTML = '';
+      restaurantsContainer.innerHTML = "";
       restaurants.forEach((restaurant) => {
-        const restaurantItem = document.createElement('div');
-        restaurantItem.classList.add('restaurant-item');
+        const restaurantItem = document.createElement("div");
+        restaurantItem.classList.add("restaurant-item");
         restaurantItem.innerHTML = createRestaurantItemTemplate(restaurant);
         restaurantsContainer.appendChild(restaurantItem);
       });
@@ -37,32 +37,31 @@ const Home = {
 
     const searchRestaurants = async (query) => {
       try {
-          const response = await fetch(API_ENDPOINT.SEARCH_RESTAURANT(query));
-          const data = await response.json();
-          displayRestaurants(data.restaurants);
+        const response = await fetch(API_ENDPOINT.SEARCH_RESTAURANT(query));
+        const data = await response.json();
+        displayRestaurants(data.restaurants);
       } catch (error) {
-          console.error('Error searching restaurants:', error);
+        console.error("Error searching restaurants:", error);
       }
-  };
-  
+    };
 
-    searchButton.addEventListener('click', () => {
+    searchButton.addEventListener("click", () => {
       const query = searchInput.value.trim();
       if (query) {
         searchRestaurants(query);
       } else {
-        alert('Please enter a search query');
+        alert("Please enter a search query");
       }
     });
 
     // Listen for Enter key press in the search input field
-    searchInput.addEventListener('keypress', (event) => {
-      if (event.key === 'Enter') {
+    searchInput.addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
         const query = searchInput.value.trim();
         if (query) {
           searchRestaurants(query);
         } else {
-          alert('Please enter a search query');
+          alert("Please enter a search query");
         }
       }
     });

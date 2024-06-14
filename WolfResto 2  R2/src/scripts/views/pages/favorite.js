@@ -1,5 +1,5 @@
-import FavoriteRestaurantIdb from '../../data/favorite-restaurant-idb';
-import { createRestaurantItemTemplate } from '../templates/template-creator';
+import FavoriteRestaurantIdb from "../../data/favorite-restaurant-idb";
+import { createRestaurantItemTemplate } from "../templates/template-creator";
 
 const Favorite = {
   async render() {
@@ -13,13 +13,12 @@ const Favorite = {
 
   async afterRender() {
     const restaurants = await FavoriteRestaurantIdb.getAllRestaurants();
-    const restaurantsContainer = document.querySelector('#restaurants');
-    console.log(restaurants)
+    const restaurantsContainer = document.querySelector("#restaurants");
+    console.log(restaurants);
 
     restaurants.forEach((restaurant) => {
       restaurantsContainer.innerHTML += createRestaurantItemTemplate(restaurant);
     });
-    
   },
 };
 

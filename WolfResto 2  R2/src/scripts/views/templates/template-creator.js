@@ -1,4 +1,4 @@
-import CONFIG from '../../globals/config';
+import CONFIG from "../../globals/config";
 
 const createRestaurantItemTemplate = (restaurant) => `
   <div class="restaurant-item">
@@ -15,7 +15,6 @@ const createRestaurantItemTemplate = (restaurant) => `
     </div>
   </div>
 `;
-
 
 const createRestaurantDetailTemplate = (restaurant) => `
   <div class="restaurant__container">
@@ -39,19 +38,18 @@ const createRestaurantDetailTemplate = (restaurant) => `
     <h3>Menu</h3>
     <h4>Food</h4>
     <ul>
-      <p>${restaurant.menus.foods.map((food) => `- ${food.name}`).join('<br>')}</p>
+      <p>${restaurant.menus.foods.map((food) => `- ${food.name}`).join("<br>")}</p>
     </ul>
     <h4>Drinks</h4>
     <ul>
-      <p>${restaurant.menus.drinks.map((drink) => `- ${drink.name}`).join('<br>')}</p>
+      <p>${restaurant.menus.drinks.map((drink) => `- ${drink.name}`).join("<br>")}</p>
     </ul>
   </div>
   <div class="restaurant__reviews"></div> <!-- Container for reviews -->
 `;
 
-
 export function createRestaurantReviewsTemplate(reviews) {
-  let reviewsHtml = '';
+  let reviewsHtml = "";
   reviews.forEach((review) => {
     reviewsHtml += `
       <div class="review">

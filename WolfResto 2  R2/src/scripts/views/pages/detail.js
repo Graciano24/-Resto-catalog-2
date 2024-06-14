@@ -1,9 +1,9 @@
-// detail.js
-
-import UrlParser from '../../routes/url-parser';
-import RestaurantSource from '../../data/restaurantdb-source';
-import { createRestaurantDetailTemplate, createRestaurantReviewsTemplate } from '../templates/template-creator';
-import LikeButtonInitiator from '../../utils/like-button-initiator';
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-alert */
+import UrlParser from "../../routes/url-parser";
+import RestaurantSource from "../../data/restaurantdb-source";
+import { createRestaurantDetailTemplate, createRestaurantReviewsTemplate } from "../templates/template-creator";
+import LikeButtonInitiator from "../../utils/like-button-initiator";
 
 const Detail = {
   async render() {
@@ -30,30 +30,31 @@ const Detail = {
   async afterRender() {
     const url = UrlParser.parseActiveUrlWithoutCombiner();
     const restaurant = await RestaurantSource.detailRestaurant(url.id);
-    const restaurantsContainer = document.querySelector('#restaurant');
+    const restaurantsContainer = document.querySelector("#restaurant");
     restaurantsContainer.innerHTML = createRestaurantDetailTemplate(restaurant);
 
     const reviewTemplate = createRestaurantReviewsTemplate(restaurant.customerReviews);
-    restaurantsContainer.insertAdjacentHTML('beforeend', reviewTemplate);
+    restaurantsContainer.insertAdjacentHTML("beforeend", reviewTemplate);
 
     LikeButtonInitiator.init({
-      likeButtonContainer: document.querySelector('#likeButtonContainer'),
+      likeButtonContainer: document.querySelector("#likeButtonContainer"),
       restaurant: {
         id: restaurant.id,
-        city: restaurant.city,
         name: restaurant.name,
-        rating: restaurant.rating,
+        description: restaurant.description,
         pictureId: restaurant.pictureId,
+        rating: restaurant.rating,
+        city: restaurant.city,
       },
     });
 
-    const form = document.getElementById('reviewForm');
-    form.addEventListener('submit', async (event) => {
+    const form = document.getElementById("reviewForm");
+    form.addEventListener("submit", async (event) => {
       event.preventDefault(); // Prevent default form submission
 
       // Get reviewer name and review content from the form
-      const reviewerName = document.getElementById('reviewerName').value;
-      const reviewContent = document.getElementById('reviewContent').value;
+      const reviewerName = document.getElementById("reviewerName").value;
+      const reviewContent = document.getElementById("reviewContent").value;
 
       // Save the review to the server
       try {
@@ -70,15 +71,15 @@ const Detail = {
         // Clear the form after adding the review
         form.reset();
       } catch (error) {
-        console.error('Error saving review:', error);
-        alert('Failed to save review. Please try again.');
+        console.error("Error saving review:", error);
+        alert("Failed to save review. Please try again.");
       }
     });
   },
 };
 
 async function appendReviewToDOM(reviews) {
-  const reviewContainer = document.querySelector('.restaurant__reviews');
+  const reviewContainer = document.querySelector(".restaurant__reviews");
   reviewContainer.innerHTML = createRestaurantReviewsTemplate(reviews);
 }
 

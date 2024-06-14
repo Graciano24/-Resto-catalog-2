@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-import API_ENDPOINT from '../globals/api-endpoint';
+import API_ENDPOINT from "../globals/api-endpoint";
 
 class RestaurantApiSource {
   static async getListOfRestaurants() {
@@ -23,21 +23,20 @@ class RestaurantApiSource {
   static async addReview(reviewData) {
     const { id, name, review } = reviewData;
     const response = await fetch(API_ENDPOINT.ADD_REVIEW, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ id, name, review }),
     });
 
     if (!response.ok) {
-      throw new Error('Failed to save review to server');
+      throw new Error("Failed to save review to server");
     }
 
     const responseData = await response.json();
     return responseData.customerReviews;
   }
 }
-
 
 export default RestaurantApiSource;
